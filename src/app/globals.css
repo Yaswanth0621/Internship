@@ -1875,3 +1875,86 @@ tbody tr:last-child td { border-bottom: none; }
     font-size: 0.75rem !important;
   }
 }
+
+/* ============================================================
+   RESPONSIVE DESIGN ACROSS ALL DEVICES (Mobile, Tablet, Laptop)
+   ============================================================ */
+/* Tablet & Medium Screens (641px to 1024px) */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2.5rem !important;
+  }
+  .hero-card {
+    max-width: 480px !important;
+    margin: 0 auto !important;
+  }
+  .curriculum-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.25rem !important;
+  }
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+  }
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 2rem !important;
+  }
+}
+
+/* Mobile Screens (Under 640px) */
+@media (max-width: 640px) {
+  .nav-desktop-menu {
+    display: none !important;
+  }
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  .curriculum-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem !important;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  .trust-pillars-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+}
+
+/* Trust Pillar Cards */
+.trust-pillar-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+  transition: all 0.2s ease;
+}
+.trust-pillar-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+  border-color: #cbd5e1;
+}
+
+/* Clean Touch Targets */
+a, button {
+  min-height: 44px;
+  min-width: 44px;
+}
+.nav-link {
+  min-height: auto;
+  min-width: auto;
+}
+

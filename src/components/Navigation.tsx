@@ -167,52 +167,28 @@ export default function Navigation() {
           {/* Drawer Menu */}
           <div className="nav-mobile-menu">
             <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem" }}>
-              {/* Courses Link (Prominent) */}
+              {/* 7-Day Micro-Internship */}
               <Link 
-                href="/courses" 
-                className={`nav-mobile-link ${pathname === "/courses" ? "nav-mobile-link--active" : ""}`} 
+                href="/#tracks" 
+                className="nav-mobile-link" 
                 onClick={() => setIsOpen(false)}
-                style={{ background: "#f8fafc", border: "1px solid #e2e8f0" }}
+                style={{ background: "#eff6ff", border: "1px solid #bfdbfe" }}
               >
                 <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-                  <div className="nav-mobile-icon-box" style={{ background: "#fef3c7", color: "#d97706" }}>
-                    <Flame size={18} />
+                  <div className="nav-mobile-icon-box" style={{ background: "#dbeafe", color: "#1d4ed8" }}>
+                    <Brain size={18} />
                   </div>
                   <div>
-                    <div style={{ fontWeight: 800, color: "#0f172a", fontSize: "0.925rem" }}>
-                      Trending Courses
+                    <div style={{ fontWeight: 800, color: "#1e3a8a", fontSize: "0.925rem" }}>
+                      7-Day AI Micro-Internship
                     </div>
-                    <div style={{ fontSize: "0.72rem", color: "#64748b" }}>
-                      AI, Web Dev, DSA & more from ₹99
+                    <div style={{ fontSize: "0.72rem", color: "#2563eb" }}>
+                      100% Free • Verified Certificate
                     </div>
                   </div>
                 </div>
-                <span className="nav-badge-hot">2026 HOT</span>
+                <ChevronRight size={16} color="#2563eb" />
               </Link>
-              
-              {/* Projects Marketplace */}
-              <a 
-                href="https://projects.futureee.me"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="nav-mobile-link"
-                onClick={() => setIsOpen(false)}
-              >
-                <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-                  <div className="nav-mobile-icon-box" style={{ background: "#f3e8ff", color: "#7c3aed" }}>
-                    <BookOpen size={18} />
-                  </div>
-                  <div>
-                    <div style={{ fontWeight: 700, color: "#1e293b", fontSize: "0.9rem" }}>
-                      Project Kits Marketplace
-                    </div>
-                    <div style={{ fontSize: "0.72rem", color: "#64748b" }}>
-                      Complete source code & resources
-                    </div>
-                  </div>
-                </div>
-                <ChevronRight size={16} color="#94a3b8" />
-              </a>
 
               {/* 1-Month Internship */}
               <Link 
@@ -229,7 +205,7 @@ export default function Navigation() {
                       1-Month Summer Internship
                     </div>
                     <div style={{ fontSize: "0.72rem", color: "#64748b" }}>
-                      Deep PyTorch, Capstones & LOR
+                      University Approved • Signed LOR
                     </div>
                   </div>
                 </div>
@@ -248,14 +224,60 @@ export default function Navigation() {
                   </div>
                   <div>
                     <div style={{ fontWeight: 700, color: "#1e293b", fontSize: "0.9rem" }}>
-                      Internship Curriculum
+                      Technical Curriculum
                     </div>
                     <div style={{ fontSize: "0.72rem", color: "#64748b" }}>
-                      7-day syllabus & code labs
+                      Python, ML, CNNs, GenAI
                     </div>
                   </div>
                 </div>
                 <ChevronRight size={16} color="#94a3b8" />
+              </Link>
+
+              {/* Projects Marketplace */}
+              <a 
+                href="https://projects.futureee.me"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="nav-mobile-link"
+                onClick={() => setIsOpen(false)}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+                  <div className="nav-mobile-icon-box" style={{ background: "#f5f3ff", color: "#7c3aed" }}>
+                    <BookOpen size={18} />
+                  </div>
+                  <div>
+                    <div style={{ fontWeight: 700, color: "#1e293b", fontSize: "0.9rem" }}>
+                      Projects Marketplace ↗
+                    </div>
+                    <div style={{ fontSize: "0.72rem", color: "#64748b" }}>
+                      Final Year Kits & IEEE Codebases
+                    </div>
+                  </div>
+                </div>
+                <ChevronRight size={16} color="#94a3b8" />
+              </a>
+
+              {/* Courses Link */}
+              <Link 
+                href="/courses" 
+                className={`nav-mobile-link ${pathname === "/courses" ? "nav-mobile-link--active" : ""}`} 
+                onClick={() => setIsOpen(false)}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+                  <div className="nav-mobile-icon-box" style={{ background: "#fef3c7", color: "#d97706" }}>
+                    <Flame size={18} />
+                  </div>
+                  <div>
+                    <div style={{ fontWeight: 700, color: "#1e293b", fontSize: "0.9rem" }}>
+                      Masterclasses (Module 1 Free)
+                    </div>
+                    <div style={{ fontSize: "0.72rem", color: "#64748b" }}>
+                      Self-paced specialization manuals
+                    </div>
+                  </div>
+                </div>
+                <span className="nav-badge-hot">HOT</span>
               </Link>
 
               {/* Verify Certificate */}

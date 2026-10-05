@@ -263,7 +263,7 @@ export default function LandingPage() {
 
             {/* Right: Hero interactive card */}
             <div style={{ display:"flex", justifyContent:"center", alignItems:"center", position:"relative" }}>
-              <div className="hero-card" id="hero-stats-card" style={{ background: "#ffffff", border: "1px solid #e2e8f0", boxShadow: "0 20px 40px -10px rgba(15, 23, 42, 0.08)", borderRadius: "24px", padding: "1.75rem" }}>
+              <div className="hero-card" id="hero-stats-card" style={{ background: "#ffffff", border: "1px solid #e2e8f0", boxShadow: "0 20px 40px -10px rgba(15, 23, 42, 0.08)", borderRadius: "24px", padding: "1.75rem", width: "100%", maxWidth: "440px" }}>
                 <div style={{ display:"flex", gap:"0.75rem", marginBottom: "1rem" }}>
                   {[
                     { label:"Enrolled", val:"10k+", bg:"#eff6ff", text:"#1d4ed8" },
@@ -279,17 +279,23 @@ export default function LandingPage() {
                 <div className="hero-logo-box" style={{ padding: "1rem", background: "#f8fafc", borderRadius: "16px", marginBottom: "1rem", border: "1px solid #f1f5f9" }}>
                   <Image src="/logo.png" alt="FutureAI Internship Platform Logo" width={260} height={180} style={{ width:"100%", height:"auto", maxHeight:"150px", objectFit:"contain" }} priority/>
                 </div>
-                <Link href="#tracks" id="hero-enroll-card-btn" className="hero-card-cta" style={{ background: "#eff6ff", color: "#2563eb", border: "1px solid #bfdbfe", padding: "0.65rem 1rem", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "space-between", textDecoration: "none", fontWeight: "700", fontSize: "0.88rem" }}>
-                  <span>Choose Your Track</span>
-                  <ChevronRight size={18}/>
-                </Link>
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                  <Link href="#tracks" id="hero-enroll-card-btn" className="hero-card-cta" style={{ background: "#2563eb", color: "#ffffff", padding: "0.75rem 1rem", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "space-between", textDecoration: "none", fontWeight: "700", fontSize: "0.9rem", boxShadow: "0 4px 12px rgba(37,99,235,0.2)" }}>
+                    <span>Choose Your Track</span>
+                    <ChevronRight size={18}/>
+                  </Link>
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.4rem", fontSize: "0.72rem", color: "#64748b", marginTop: "4px" }}>
+                    <ShieldCheck size={13} color="#16a34a" />
+                    <span>No upfront payment required to begin</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* TRUST BAR */}
+      {/* TRUST BAR — COLLEGES */}
       <section id="trust-bar" style={{ background:"#ffffff", borderTop:"1px solid #e2e8f0", borderBottom:"1px solid #e2e8f0", padding:"1.75rem 0" }}>
         <div className="container-custom">
           <p style={{ textAlign:"center", fontSize:"0.76rem", fontWeight:700, color:"#64748b", textTransform:"uppercase", letterSpacing:"0.08em", marginBottom:"0.85rem" }}>
@@ -297,6 +303,69 @@ export default function LandingPage() {
           </p>
           <div style={{ display:"flex", flexWrap:"wrap", justifyContent:"center", gap:"0.75rem 1.75rem", textAlign: "center" }}>
             {colleges.map(c => <span key={c} style={{ fontSize:"0.84rem", fontWeight:600, color:"#475569" }}>{c}</span>)}
+          </div>
+        </div>
+      </section>
+
+      {/* 4 PILLARS OF INSTITUTIONAL TRUST */}
+      <section id="trust-pillars" style={{ background: "#f8fafc", padding: "3.5rem 0", borderBottom: "1px solid #e2e8f0" }}>
+        <div className="container-custom">
+          <div className="trust-pillars-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "1.25rem" }}>
+            <div className="trust-pillar-card">
+              <div style={{ width: "44px", height: "44px", borderRadius: "12px", background: "#eff6ff", color: "#2563eb", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <GraduationCap size={22} />
+              </div>
+              <div>
+                <div style={{ fontSize: "0.95rem", fontWeight: 800, color: "#0f172a", marginBottom: "0.25rem" }}>
+                  AICTE Aligned Format
+                </div>
+                <div style={{ fontSize: "0.82rem", color: "#64748b", lineHeight: 1.5 }}>
+                  Meets university curriculum guidelines for semester internship credits and academic approval.
+                </div>
+              </div>
+            </div>
+
+            <div className="trust-pillar-card">
+              <div style={{ width: "44px", height: "44px", borderRadius: "12px", background: "#f0fdf4", color: "#16a34a", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <QrCode size={22} />
+              </div>
+              <div>
+                <div style={{ fontSize: "0.95rem", fontWeight: 800, color: "#0f172a", marginBottom: "0.25rem" }}>
+                  Tamper-Proof QR Code
+                </div>
+                <div style={{ fontSize: "0.82rem", color: "#64748b", lineHeight: 1.5 }}>
+                  Every credential has an encrypted QR code verified live on futureee.me/verify by employers.
+                </div>
+              </div>
+            </div>
+
+            <div className="trust-pillar-card">
+              <div style={{ width: "44px", height: "44px", borderRadius: "12px", background: "#fef3c7", color: "#d97706", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <FileText size={22} />
+              </div>
+              <div>
+                <div style={{ fontSize: "0.95rem", fontWeight: 800, color: "#0f172a", marginBottom: "0.25rem" }}>
+                  Official Offer Letter
+                </div>
+                <div style={{ fontSize: "0.82rem", color: "#64748b", lineHeight: 1.5 }}>
+                  Download an official Internship Offer & Acceptance letterhead immediately upon registration.
+                </div>
+              </div>
+            </div>
+
+            <div className="trust-pillar-card">
+              <div style={{ width: "44px", height: "44px", borderRadius: "12px", background: "#f5f3ff", color: "#7c3aed", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <ShieldCheck size={22} />
+              </div>
+              <div>
+                <div style={{ fontSize: "0.95rem", fontWeight: 800, color: "#0f172a", marginBottom: "0.25rem" }}>
+                  Verified & Secure
+                </div>
+                <div style={{ fontSize: "0.82rem", color: "#64748b", lineHeight: 1.5 }}>
+                  Razorpay Live SSL encrypted payments with full transparent pricing and zero recurring fees.
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
