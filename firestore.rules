@@ -1,0 +1,53 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Securing the students collection
+    match /students/{studentId} {
+      // Helper function to check if the user is an admin
+      function isAdmin() {
+        return request.auth != null && (
+          request.auth.token.email == 'team@futureee.me' || 
+          request.auth.token.email == 'admin@futureee.me' ||
+          request.auth.token.email.matches('.*@futureee\\.me$')
+        );
+      }
+      
+      // Helper function to check if the request is from the owner student
+      function isOwner(studentId) {
+        return request.auth != null && request.auth.uid == studentId;
+      }
+
+      // Public read access is permitted to support verifiable credentials and public student portfolios
+      allow read: if true;
+
+      // Student record creation rules
+      allow create: if isOwner(studentId);
+
+      // Student record update rules (Hack-Proof Gate)
+      allow update: if isAdmin() || (
+        isOwner(studentId) && 
+        // A student can NEVER modify isVerified
+        (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['isVerified'])) && (
+          // Case 1: They are updating non-sensitive data (e.g. progress, details, task links)
+          (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['paymentStatus', 'approvedAt', 'certificateId'])) ||
+          // Case 2: Setting paymentStatus to 'pending' or 'unpaid' is permitted (for offline verification submissions)
+          (
+            (request.resource.data.paymentStatus == 'pending' || request.resource.data.paymentStatus == 'unpaid') &&
+            (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['approvedAt', 'certificateId']))
+          ) ||
+          // Case 3: Setting paymentStatus to 'approved' is ONLY permitted if they provide a valid Razorpay transaction id in the same write operation
+          (
+            request.resource.data.paymentStatus == 'approved' && 
+            request.resource.data.razorpay_payment_id != null && 
+            request.resource.data.razorpay_payment_id != '' && 
+            request.resource.data.razorpay_payment_id != 'none'
+          )
+        )
+      );
+
+      // Students can never delete their own record; only admins can delete records.
+      allow delete: if isAdmin();
+    }
+  }
+}

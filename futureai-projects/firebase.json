@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "site": "projects-intership-8083d",
+    "public": "out",
+    "cleanUrls": true,
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+}

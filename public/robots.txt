@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Allow: /verify/
+Allow: /privacy/
+Allow: /terms/
+Allow: /auth/
+
+Disallow: /dashboard/
+Disallow: /admin/
+Disallow: /maintenance/
+Disallow: /api/
+
+Sitemap: https://futureee.me/sitemap.xml
