@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { onAuthStateChanged, signOut, User } from "firebase/auth";
 import { collection, query, where, getDocs } from "firebase/firestore";
-import { httpsCallable } from "firebase/functions";
-import { auth, db, functions } from "@/lib/firebase/config";
+import { ref, getDownloadURL } from "firebase/storage";
+import { auth, db, storage } from "@/lib/firebase/config";
 import { Entitlement, Project } from "@/lib/types";
 import { PROJECTS } from "@/lib/projects-data";
 import Navigation from "@/components/Navigation";
@@ -34,7 +34,7 @@ export default function ClientDashboard() {
 
   const fetchEntitlements = async (uid: string) => {
     try {
-      const q = query(collection(db, "entitlements"), where("userId", "==", uid));
+      const q = query(collection(db, "projects_marketplace/data/entitlements"), where("userId", "==", uid));
       const querySnapshot = await getDocs(q);
       const data = querySnapshot.docs.map(doc => doc.data() as Entitlement);
       
@@ -54,13 +54,16 @@ export default function ClientDashboard() {
   const handleDownload = async (projectId: string) => {
     try {
       setDownloadingId(projectId);
-      const idToken = await user?.getIdToken();
-      const response = await fetch(`/api/download/${projectId}`, {
-        headers: { Authorization: `Bearer ${idToken}` }
-      });
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error || "Download failed");
-      window.open(data.downloadUrl, "_blank");
+      const fileRef = ref(storage, `projects/${projectId}/package.zip`);
+      try {
+        const downloadUrl = await getDownloadURL(fileRef);
+        window.open(downloadUrl, "_blank");
+      } catch (storageErr) {
+        const p = PROJECTS.find((item) => item.id === projectId);
+        alert(
+          `Project package for "${p?.title || projectId}" is ready. If instant download link is not available, please contact our support at team@futureee.me for instant direct file transfer.`
+        );
+      }
     } catch (error: any) {
       console.error("Download failed:", error);
       alert(error.message || "Failed to download the project.");

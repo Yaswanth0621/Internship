@@ -49,5 +49,30 @@ service cloud.firestore {
       // Students can never delete their own record; only admins can delete records.
       allow delete: if isAdmin();
     }
+
+    // Projects Marketplace collections
+    match /projects_marketplace/data {
+      function isAdmin() {
+        return request.auth != null && (
+          request.auth.token.email == 'team@futureee.me' || 
+          request.auth.token.email == 'admin@futureee.me' ||
+          request.auth.token.email.matches('.*@futureee\\.me$')
+        );
+      }
+
+      match /orders/{orderId} {
+        allow read: if request.auth != null && (request.auth.uid == resource.data.userId || isAdmin());
+        allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
+        allow update, delete: if isAdmin();
+      }
+
+      match /entitlements/{entitlementId} {
+        allow read: if request.auth != null && (request.auth.uid == resource.data.userId || isAdmin());
+        allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
+        allow update: if request.auth != null && (request.auth.uid == resource.data.userId || isAdmin());
+        allow delete: if isAdmin();
+      }
+    }
   }
 }
+
