@@ -9,13 +9,16 @@ import { Entitlement, Project } from "@/lib/types";
 import { PROJECTS } from "@/lib/projects-data";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Package, LogOut, ArrowRight, Download, BookOpen, Clock, Loader2 } from "lucide-react";
+import ProjectKitModal from "@/components/ProjectKitModal";
+import { generateAndDownloadProjectZip } from "@/lib/zip-generator";
+import { Package, LogOut, ArrowRight, Download, BookOpen, Clock, Loader2, Sparkles, FolderTree } from "lucide-react";
 import Link from "next/link";
 
 export default function ClientDashboard() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [entitlements, setEntitlements] = useState<(Entitlement & { project: Project | undefined })[]>([]);
+  const [selectedProjectForKit, setSelectedProjectForKit] = useState<Project | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -51,19 +54,11 @@ export default function ClientDashboard() {
 
   const [downloadingId, setDownloadingId] = useState<string | null>(null);
 
-  const handleDownload = async (projectId: string) => {
+  const handleDownload = async (project: Project) => {
     try {
-      setDownloadingId(projectId);
-      const fileRef = ref(storage, `projects/${projectId}/package.zip`);
-      try {
-        const downloadUrl = await getDownloadURL(fileRef);
-        window.open(downloadUrl, "_blank");
-      } catch (storageErr) {
-        const p = PROJECTS.find((item) => item.id === projectId);
-        alert(
-          `Project package for "${p?.title || projectId}" is ready. If instant download link is not available, please contact our support at team@futureee.me for instant direct file transfer.`
-        );
-      }
+      setDownloadingId(project.id);
+      // Generate and download client-side ZIP with all 13 promised assets
+      await generateAndDownloadProjectZip(project);
     } catch (error: any) {
       console.error("Download failed:", error);
       alert(error.message || "Failed to download the project.");
@@ -122,9 +117,18 @@ export default function ClientDashboard() {
                 <p style={{ color: "var(--muted-light)", marginBottom: "1.5rem" }}>
                   You haven&apos;t purchased any project kits yet.
                 </p>
-                <Link href="/projects" className="btn-primary">
-                  Explore Projects
-                </Link>
+                <div style={{ display: "flex", gap: "0.75rem", justifyContent: "center", flexWrap: "wrap" }}>
+                  <Link href="/projects" className="btn-primary">
+                    Explore Projects
+                  </Link>
+                  <button
+                    onClick={() => setSelectedProjectForKit(PROJECTS[0])}
+                    className="btn-secondary"
+                    style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
+                  >
+                    <Sparkles size={16} /> Preview Sample Deliverables Kit
+                  </button>
+                </div>
               </div>
             ) : (
               <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
@@ -134,6 +138,7 @@ export default function ClientDashboard() {
                 
                 {entitlements.map((ent, i) => {
                   if (!ent.project) return null;
+                  const currentProject = ent.project;
                   
                   return (
                     <div
@@ -152,11 +157,11 @@ export default function ClientDashboard() {
                       <div style={{ flex: 1, minWidth: "250px" }}>
                         <div style={{ display: "flex", gap: "0.5rem", marginBottom: "0.5rem" }}>
                           <span style={{ fontSize: "0.7rem", padding: "0.2rem 0.6rem", background: "rgba(124,58,237,0.1)", color: "#9f67ff", borderRadius: "20px", fontWeight: "600" }}>
-                            {ent.project.category}
+                            {currentProject.category}
                           </span>
                         </div>
                         <h3 style={{ fontSize: "1.1rem", fontWeight: "700", color: "#f8fafc", marginBottom: "0.4rem" }}>
-                          {ent.project.title}
+                          {currentProject.title}
                         </h3>
                         <div style={{ display: "flex", alignItems: "center", gap: "1rem", fontSize: "0.8rem", color: "var(--muted)" }}>
                           <span style={{ display: "flex", alignItems: "center", gap: "0.3rem" }}>
@@ -165,20 +170,27 @@ export default function ClientDashboard() {
                         </div>
                       </div>
                       
-                      <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+                      <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap", alignItems: "center" }}>
+                        <button
+                          className="btn-primary"
+                          onClick={() => setSelectedProjectForKit(currentProject)}
+                          style={{ padding: "0.6rem 1.1rem", display: "flex", alignItems: "center", gap: "0.4rem" }}
+                        >
+                          <FolderTree size={16} /> Open Project Workspace
+                        </button>
                         <button
                           className="btn-secondary"
-                          onClick={() => handleDownload(ent.projectId)}
-                          disabled={downloadingId === ent.projectId}
-                          style={{ padding: "0.6rem 1rem", opacity: downloadingId === ent.projectId ? 0.7 : 1, cursor: downloadingId === ent.projectId ? "not-allowed" : "pointer" }}
+                          onClick={() => handleDownload(currentProject)}
+                          disabled={downloadingId === currentProject.id}
+                          style={{ padding: "0.6rem 1rem", opacity: downloadingId === currentProject.id ? 0.7 : 1, cursor: downloadingId === currentProject.id ? "not-allowed" : "pointer" }}
                         >
-                          {downloadingId === ent.projectId ? (
-                            <><Loader2 size={15} className="animate-spin" /> Preparing...</>
+                          {downloadingId === currentProject.id ? (
+                            <><Loader2 size={15} className="animate-spin" /> Packaging ZIP...</>
                           ) : (
-                            <><Download size={15} /> Download Files</>
+                            <><Download size={15} /> Download Full Kit (.ZIP)</>
                           )}
                         </button>
-                        <Link href={`/projects/${ent.project.slug}`} className="btn-ghost" style={{ padding: "0.6rem 1rem", border: "1px solid var(--border)" }}>
+                        <Link href={`/projects/${currentProject.slug}`} className="btn-ghost" style={{ padding: "0.6rem 1rem", border: "1px solid var(--border)" }}>
                           <BookOpen size={15} /> View Details
                         </Link>
                       </div>
@@ -190,6 +202,15 @@ export default function ClientDashboard() {
           </div>
         </div>
       </main>
+
+      {/* Interactive Project Kit Deliverables Modal */}
+      {selectedProjectForKit && (
+        <ProjectKitModal
+          project={selectedProjectForKit}
+          onClose={() => setSelectedProjectForKit(null)}
+        />
+      )}
+
       <Footer />
     </>
   );

@@ -8,6 +8,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ProjectCard from "@/components/ProjectCard";
 import { Project } from "@/lib/types";
+import { generateProjectKit } from "@/lib/project-kits-data";
 import {
   CheckCircle,
   ArrowRight,
@@ -24,6 +25,11 @@ import {
   ChevronDown,
   ChevronUp,
   ExternalLink,
+  Sparkles,
+  Terminal,
+  Database,
+  FolderTree,
+  Award,
 } from "lucide-react";
 
 interface Props {
@@ -50,7 +56,10 @@ export default function ProjectDetailClient({ project, related }: Props) {
   const [activeTab, setActiveTab] = useState("Overview");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [previewMode, setPreviewMode] = useState<"abstract" | "arch" | "viva" | "tree" | "resume">("abstract");
   const router = useRouter();
+
+  const kit = generateProjectKit(project);
 
   const handleBuy = async () => {
     if (!auth.currentUser) {
@@ -564,26 +573,183 @@ export default function ProjectDetailClient({ project, related }: Props) {
               )}
 
               {activeTab === "What's Included" && (
-                <div>
-                  <h2 style={{ marginBottom: "1.25rem", fontSize: "1.4rem" }}>What&apos;s Included</h2>
-                  <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "1.75rem" }}>
+                  <div>
+                    <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.25rem" }}>
+                      <span style={{ fontSize: "0.75rem", fontWeight: "700", textTransform: "uppercase", padding: "0.2rem 0.6rem", borderRadius: "20px", backgroundColor: "#ede9fe", color: "#6d28d9" }}>
+                        Guaranteed Complete Kit
+                      </span>
+                    </div>
+                    <h2 style={{ fontSize: "1.4rem", fontWeight: "800", color: "#0f172a" }}>
+                      Everything Included In This Project
+                    </h2>
+                    <p style={{ color: "var(--muted)", fontSize: "0.9rem" }}>
+                      Every purchase unlocks all 13 promised academic, code, and career assets ready for immediate download.
+                    </p>
+                  </div>
+
+                  {/* Checklist of deliverables */}
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.6rem" }}>
                     {project.includes.map((item) => (
                       <div
                         key={item}
                         style={{
                           display: "flex",
                           alignItems: "center",
-                          gap: "0.75rem",
-                          padding: "0.875rem 1rem",
+                          gap: "0.6rem",
+                          padding: "0.75rem 0.9rem",
                           background: "var(--card)",
                           border: "1px solid var(--border)",
                           borderRadius: "10px",
+                          fontSize: "0.85rem",
+                          color: "#334155",
                         }}
                       >
-                        <CheckCircle size={15} color="#10b981" style={{ flexShrink: 0 }} />
-                        <span style={{ fontSize: "0.9rem", color: "var(--muted-light)" }}>{item}</span>
+                        <CheckCircle size={15} color="#16a34a" style={{ flexShrink: 0 }} />
+                        <span style={{ fontWeight: "500" }}>{item}</span>
                       </div>
                     ))}
+                  </div>
+
+                  {/* Transparent "What's in the Box" Preview Box */}
+                  <div style={{ border: "1px solid #e2e8f0", borderRadius: "14px", overflow: "hidden", backgroundColor: "#ffffff" }}>
+                    <div
+                      style={{
+                        padding: "1rem 1.25rem",
+                        backgroundColor: "#f8fafc",
+                        borderBottom: "1px solid #e2e8f0",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        flexWrap: "wrap",
+                        gap: "0.5rem",
+                      }}
+                    >
+                      <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                        <Sparkles size={16} color="#7c3aed" />
+                        <span style={{ fontSize: "0.9rem", fontWeight: "700", color: "#0f172a" }}>
+                          Transparent Quality Preview (What You Get)
+                        </span>
+                      </div>
+                      <div style={{ display: "flex", gap: "0.3rem", flexWrap: "wrap" }}>
+                        {[
+                          { id: "abstract", label: "IEEE Abstract" },
+                          { id: "arch", label: "Architecture" },
+                          { id: "viva", label: "Viva Q&A" },
+                          { id: "tree", label: "Code Tree" },
+                          { id: "resume", label: "Resume Bullets" },
+                        ].map((m) => (
+                          <button
+                            key={m.id}
+                            onClick={() => setPreviewMode(m.id as any)}
+                            style={{
+                              padding: "0.3rem 0.65rem",
+                              fontSize: "0.75rem",
+                              borderRadius: "6px",
+                              fontWeight: previewMode === m.id ? "700" : "500",
+                              backgroundColor: previewMode === m.id ? "#7c3aed" : "transparent",
+                              color: previewMode === m.id ? "#ffffff" : "#64748b",
+                              border: previewMode === m.id ? "1px solid #7c3aed" : "1px solid #e2e8f0",
+                              cursor: "pointer",
+                            }}
+                          >
+                            {m.label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div style={{ padding: "1.25rem" }}>
+                      {previewMode === "abstract" && (
+                        <div>
+                          <div style={{ fontSize: "0.75rem", fontWeight: "700", textTransform: "uppercase", color: "#7c3aed", marginBottom: "0.3rem" }}>
+                            Sample Project Synopsis & Abstract
+                          </div>
+                          <p style={{ fontSize: "0.85rem", color: "#334155", lineHeight: "1.7", whiteSpace: "pre-line" }}>
+                            {kit.abstract}
+                          </p>
+                        </div>
+                      )}
+
+                      {previewMode === "arch" && (
+                        <div>
+                          <div style={{ fontSize: "0.75rem", fontWeight: "700", textTransform: "uppercase", color: "#7c3aed", marginBottom: "0.3rem" }}>
+                            Component Blueprint & Data Flow (Mermaid Specification)
+                          </div>
+                          <pre style={{ backgroundColor: "#020617", color: "#38bdf8", padding: "1rem", borderRadius: "8px", fontSize: "0.75rem", lineHeight: "1.6", margin: 0, overflowX: "auto" }}>
+                            {kit.architectureDiagrams.systemArchitecture}
+                          </pre>
+                        </div>
+                      )}
+
+                      {previewMode === "viva" && (
+                        <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+                          <div style={{ fontSize: "0.75rem", fontWeight: "700", textTransform: "uppercase", color: "#7c3aed" }}>
+                            Sample Viva Voce Questions & Evaluation Tips (Top 3 of 25)
+                          </div>
+                          {kit.vivaQuestions.slice(0, 3).map((q) => (
+                            <div key={q.id} style={{ padding: "0.75rem 1rem", backgroundColor: "#f8fafc", borderRadius: "8px", border: "1px solid #e2e8f0" }}>
+                              <div style={{ fontSize: "0.85rem", fontWeight: "700", color: "#0f172a" }}>
+                                Q{q.id}. {q.question}
+                              </div>
+                              <p style={{ fontSize: "0.82rem", color: "#334155", marginTop: "0.3rem", lineHeight: "1.6" }}>
+                                <strong>Answer:</strong> {q.answer}
+                              </p>
+                              <div style={{ fontSize: "0.75rem", color: "#92400e", marginTop: "0.3rem", fontStyle: "italic" }}>
+                                💡 Tip: {q.examinerTip}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
+                      {previewMode === "tree" && (
+                        <div>
+                          <div style={{ fontSize: "0.75rem", fontWeight: "700", textTransform: "uppercase", color: "#7c3aed", marginBottom: "0.3rem" }}>
+                            Source Code Directory Tree
+                          </div>
+                          <pre style={{ backgroundColor: "#020617", color: "#94a3b8", padding: "1rem", borderRadius: "8px", fontSize: "0.75rem", lineHeight: "1.6", margin: 0, overflowX: "auto" }}>
+                            {kit.codeWalkthrough}
+                          </pre>
+                        </div>
+                      )}
+
+                      {previewMode === "resume" && (
+                        <div>
+                          <div style={{ fontSize: "0.75rem", fontWeight: "700", textTransform: "uppercase", color: "#7c3aed", marginBottom: "0.5rem" }}>
+                            ATS Resume Bullets Included
+                          </div>
+                          <ul style={{ display: "flex", flexDirection: "column", gap: "0.4rem", paddingLeft: "1.2rem", margin: 0 }}>
+                            {kit.resumeBullets.map((b, idx) => (
+                              <li key={idx} style={{ fontSize: "0.85rem", color: "#334155", lineHeight: "1.6" }}>
+                                {b}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+
+                    <div style={{ padding: "0.75rem 1.25rem", backgroundColor: "#f8fafc", borderTop: "1px solid #e2e8f0", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "0.5rem" }}>
+                      <span style={{ fontSize: "0.8rem", color: "#64748b" }}>
+                        Instant full download unlocked immediately on checkout.
+                      </span>
+                      <button
+                        onClick={handleBuy}
+                        style={{
+                          padding: "0.45rem 1rem",
+                          backgroundColor: "#7c3aed",
+                          color: "#ffffff",
+                          borderRadius: "8px",
+                          fontWeight: "700",
+                          fontSize: "0.8rem",
+                          border: "none",
+                          cursor: "pointer",
+                        }}
+                      >
+                        Buy Kit & Download (₹{project.price})
+                      </button>
+                    </div>
                   </div>
                 </div>
               )}
