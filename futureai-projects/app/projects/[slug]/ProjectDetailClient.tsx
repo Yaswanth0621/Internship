@@ -74,7 +74,7 @@ export default function ProjectDetailClient({ project, related }: Props) {
 
       // 2. Open Razorpay Checkout
       const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "rzp_live_TkH9L20mqBOzQU",
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
         amount: amount.toString(),
         currency: currency,
         name: "FutureAI Projects",

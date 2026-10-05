@@ -91,7 +91,7 @@ export default function PaymentClient() {
     setLoading(true);
 
     const options = {
-      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "rzp_live_TkH9L20mqBOzQU", // Public Live Key ID
+      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // Public Live Key ID
       amount: amountInPaise.toString(),
       currency: "INR",
       name: "FutureAI Education",
