@@ -93,9 +93,12 @@ export const metadata: Metadata = {
     google: "sPbQWQbK3InJq5W3c8XVoE2vooNSlHkBrFOKxRsg32g",
   },
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/favicon.ico",
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico" },
+    ],
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
   },
 };
 

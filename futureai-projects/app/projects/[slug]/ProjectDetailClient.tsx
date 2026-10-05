@@ -105,7 +105,7 @@ export default function ProjectDetailClient({ project, related }: Props) {
           email: auth.currentUser.email,
         },
         theme: {
-          color: "#7C3AED",
+          color: "#2563eb",
         },
       };
 
@@ -168,8 +168,9 @@ export default function ProjectDetailClient({ project, related }: Props) {
                       borderRadius: "20px",
                       fontSize: "0.75rem",
                       fontWeight: "700",
-                      background: "rgba(124,58,237,0.15)",
-                      color: "#9f67ff",
+                      background: "#eff6ff",
+                      color: "#2563eb",
+                      border: "1px solid #bfdbfe",
                     }}
                   >
                     {CATEGORY_LABELS[project.category]}
@@ -181,8 +182,9 @@ export default function ProjectDetailClient({ project, related }: Props) {
                         borderRadius: "20px",
                         fontSize: "0.75rem",
                         fontWeight: "700",
-                        background: "rgba(249,115,22,0.15)",
-                        color: "#fb923c",
+                        background: "#fff7ed",
+                        color: "#c2410c",
+                        border: "1px solid #ffedd5",
                       }}
                     >
                       🎓 Final Year
@@ -196,16 +198,16 @@ export default function ProjectDetailClient({ project, related }: Props) {
                       fontWeight: "600",
                       color:
                         project.difficulty === "Advanced"
-                          ? "#f87171"
+                          ? "#dc2626"
                           : project.difficulty === "Intermediate"
-                          ? "#fbbf24"
-                          : "#34d399",
+                          ? "#d97706"
+                          : "#16a34a",
                       background:
                         project.difficulty === "Advanced"
-                          ? "rgba(239,68,68,0.1)"
+                          ? "#fef2f2"
                           : project.difficulty === "Intermediate"
-                          ? "rgba(245,158,11,0.1)"
-                          : "rgba(16,185,129,0.1)",
+                          ? "#fefce8"
+                          : "#f0fdf4",
                     }}
                   >
                     {project.difficulty}
@@ -218,7 +220,7 @@ export default function ProjectDetailClient({ project, related }: Props) {
                     fontWeight: "900",
                     lineHeight: "1.2",
                     marginBottom: "1rem",
-                    color: "#f8fafc",
+                    color: "#0f172a",
                   }}
                 >
                   {project.title}
@@ -241,21 +243,21 @@ export default function ProjectDetailClient({ project, related }: Props) {
                 <div style={{ display: "flex", gap: "2rem", flexWrap: "wrap" }}>
                   <div>
                     <div style={{ fontSize: "0.75rem", color: "var(--muted)", marginBottom: "0.2rem" }}>Tier</div>
-                    <div style={{ fontSize: "0.9rem", fontWeight: "700", color: "#f8fafc" }}>{project.tier}</div>
+                    <div style={{ fontSize: "0.9rem", fontWeight: "700", color: "#0f172a" }}>{project.tier}</div>
                   </div>
                   <div>
                     <div style={{ fontSize: "0.75rem", color: "var(--muted)", marginBottom: "0.2rem" }}>License</div>
-                    <div style={{ fontSize: "0.9rem", fontWeight: "700", color: "#f8fafc" }}>{project.licenseType}</div>
+                    <div style={{ fontSize: "0.9rem", fontWeight: "700", color: "#0f172a" }}>{project.licenseType}</div>
                   </div>
                   <div>
                     <div style={{ fontSize: "0.75rem", color: "var(--muted)", marginBottom: "0.2rem" }}>Includes</div>
-                    <div style={{ fontSize: "0.9rem", fontWeight: "700", color: "#f8fafc" }}>
+                    <div style={{ fontSize: "0.9rem", fontWeight: "700", color: "#0f172a" }}>
                       {project.includes.length} items
                     </div>
                   </div>
                   <div>
                     <div style={{ fontSize: "0.75rem", color: "var(--muted)", marginBottom: "0.2rem" }}>Modules</div>
-                    <div style={{ fontSize: "0.9rem", fontWeight: "700", color: "#f8fafc" }}>
+                    <div style={{ fontSize: "0.9rem", fontWeight: "700", color: "#0f172a" }}>
                       {project.modules.length}
                     </div>
                   </div>
@@ -265,18 +267,19 @@ export default function ProjectDetailClient({ project, related }: Props) {
               {/* Right: Purchase card */}
               <div
                 style={{
-                  background: "var(--card)",
+                  background: "#ffffff",
                   border: "1px solid var(--border)",
                   borderRadius: "20px",
                   padding: "1.75rem",
                   position: "sticky",
                   top: "80px",
+                  boxShadow: "0 10px 30px -5px rgba(15, 23, 42, 0.08)",
                 }}
                 className="purchase-card"
               >
                 <div style={{ marginBottom: "1.25rem" }}>
                   <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem" }}>
-                    <span style={{ fontSize: "2.25rem", fontWeight: "900", color: "#f8fafc" }}>
+                    <span style={{ fontSize: "2.25rem", fontWeight: "900", color: "#0f172a" }}>
                       ₹{project.price.toLocaleString("en-IN")}
                     </span>
                     {project.originalPrice && (
@@ -310,8 +313,8 @@ export default function ProjectDetailClient({ project, related }: Props) {
                   </a>
                 )}
 
-                <div style={{ marginTop: "1.25rem", padding: "1rem", background: "var(--surface)", borderRadius: "12px" }}>
-                  <p style={{ fontSize: "0.75rem", fontWeight: "700", color: "#f8fafc", marginBottom: "0.5rem" }}>
+                <div style={{ marginTop: "1.25rem", padding: "1rem", background: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: "12px" }}>
+                  <p style={{ fontSize: "0.75rem", fontWeight: "700", color: "#0f172a", marginBottom: "0.5rem" }}>
                     This kit includes:
                   </p>
                   <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.35rem" }}>
@@ -382,10 +385,10 @@ export default function ProjectDetailClient({ project, related }: Props) {
                   padding: "0.75rem 1.25rem",
                   fontSize: "0.875rem",
                   fontWeight: "600",
-                  color: activeTab === tab ? "#9f67ff" : "var(--muted)",
+                  color: activeTab === tab ? "#2563eb" : "#64748b",
                   background: "none",
                   border: "none",
-                  borderBottom: activeTab === tab ? "2px solid #7C3AED" : "2px solid transparent",
+                  borderBottom: activeTab === tab ? "2px solid #2563eb" : "2px solid transparent",
                   cursor: "pointer",
                   whiteSpace: "nowrap",
                   transition: "color 0.2s",
@@ -450,14 +453,14 @@ export default function ProjectDetailClient({ project, related }: Props) {
                                 justifyContent: "center",
                                 fontSize: "0.75rem",
                                 fontWeight: "800",
-                                color: "#9f67ff",
+                                color: "#2563eb",
                                 flexShrink: 0,
                               }}
                             >
                               {String(i + 1).padStart(2, "0")}
                             </div>
                             <div>
-                              <div style={{ fontWeight: "700", fontSize: "0.9rem", color: "#f8fafc", marginBottom: "0.2rem" }}>
+                              <div style={{ fontWeight: "700", fontSize: "0.9rem", color: "#0f172a", marginBottom: "0.2rem" }}>
                                 {mod.name}
                               </div>
                               <div style={{ fontSize: "0.83rem", color: "var(--muted)" }}>{mod.description}</div>
@@ -663,7 +666,7 @@ export default function ProjectDetailClient({ project, related }: Props) {
                               background: "none",
                               border: "none",
                               cursor: "pointer",
-                              color: "#f8fafc",
+                              color: "#0f172a",
                               fontWeight: "600",
                               fontSize: "0.9rem",
                               textAlign: "left",
@@ -728,7 +731,7 @@ export default function ProjectDetailClient({ project, related }: Props) {
                               background: "none",
                               border: "none",
                               cursor: "pointer",
-                              color: "#f8fafc",
+                              color: "#0f172a",
                               fontWeight: "600",
                               fontSize: "0.9rem",
                               textAlign: "left",
@@ -765,13 +768,14 @@ export default function ProjectDetailClient({ project, related }: Props) {
               {/* Mini buy card */}
               <div
                 style={{
-                  background: "var(--card)",
-                  border: "1px solid var(--primary)",
+                  background: "#ffffff",
+                  border: "1px solid #bfdbfe",
                   borderRadius: "16px",
                   padding: "1.25rem",
+                  boxShadow: "var(--shadow-card)",
                 }}
               >
-                <div style={{ fontSize: "1.75rem", fontWeight: "900", color: "#f8fafc", marginBottom: "0.25rem" }}>
+                <div style={{ fontSize: "1.75rem", fontWeight: "900", color: "#0f172a", marginBottom: "0.25rem" }}>
                   ₹{project.price.toLocaleString("en-IN")}
                 </div>
                 <button

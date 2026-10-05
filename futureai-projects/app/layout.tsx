@@ -60,6 +60,14 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico" },
+    ],
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
@@ -71,7 +79,7 @@ export default function RootLayout({
     <html lang="en" className={inter.variable}>
       <head>
         <link rel="canonical" href="https://projects.futureee.me" />
-        <meta name="theme-color" content="#7C3AED" />
+        <meta name="theme-color" content="#2563eb" />
       </head>
       <body className="font-inter antialiased bg-background text-foreground">
         {children}

@@ -8,16 +8,16 @@ interface ProjectCardProps {
 }
 
 const CATEGORY_COLORS: Record<string, string> = {
-  "ai-ml": "#7C3AED",
-  "generative-ai": "#06B6D4",
-  "ai-agents": "#8B5CF6",
-  "full-stack": "#10B981",
-  "data-science": "#F59E0B",
-  "computer-vision": "#EC4899",
-  cybersecurity: "#EF4444",
-  "cloud-devops": "#3B82F6",
-  mobile: "#14B8A6",
-  "final-year": "#F97316",
+  "ai-ml": "#2563eb",
+  "generative-ai": "#4f46e5",
+  "ai-agents": "#7c3aed",
+  "full-stack": "#059669",
+  "data-science": "#d97706",
+  "computer-vision": "#db2777",
+  cybersecurity: "#dc2626",
+  "cloud-devops": "#0284c7",
+  mobile: "#0d9488",
+  "final-year": "#ea580c",
 };
 
 const CATEGORY_LABELS: Record<string, string> = {
@@ -34,33 +34,34 @@ const CATEGORY_LABELS: Record<string, string> = {
 };
 
 export default function ProjectCard({ project, compact = false }: ProjectCardProps) {
-  const catColor = CATEGORY_COLORS[project.category] || "#7C3AED";
+  const catColor = CATEGORY_COLORS[project.category] || "#2563eb";
   const catLabel = CATEGORY_LABELS[project.category] || project.category;
 
   return (
     <Link href={`/projects/${project.slug}`} style={{ textDecoration: "none" }}>
       <div className="project-card" style={{ height: "100%", display: "flex", flexDirection: "column" }}>
-        {/* Card top — colored category banner */}
+        {/* Card top — subtle colored accent border */}
         <div
           style={{
-            height: "6px",
-            background: `linear-gradient(90deg, ${catColor}, ${catColor}88)`,
+            height: "4px",
+            background: `linear-gradient(90deg, ${catColor}, ${catColor}aa)`,
           }}
         />
 
-        <div style={{ padding: compact ? "1rem" : "1.25rem", flex: 1, display: "flex", flexDirection: "column" }}>
+        <div style={{ padding: compact ? "1.1rem" : "1.35rem", flex: 1, display: "flex", flexDirection: "column" }}>
           {/* Header badges */}
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "0.75rem" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "0.85rem" }}>
             <span
               style={{
-                padding: "0.2rem 0.6rem",
-                borderRadius: "20px",
-                fontSize: "0.7rem",
+                padding: "0.25rem 0.65rem",
+                borderRadius: "9999px",
+                fontSize: "0.72rem",
                 fontWeight: "700",
                 letterSpacing: "0.03em",
                 textTransform: "uppercase",
-                background: `${catColor}20`,
+                background: `${catColor}15`,
                 color: catColor,
+                border: `1px solid ${catColor}30`,
               }}
             >
               {catLabel}
@@ -69,12 +70,13 @@ export default function ProjectCard({ project, compact = false }: ProjectCardPro
               {project.isFinalYear && (
                 <span
                   style={{
-                    padding: "0.2rem 0.5rem",
-                    borderRadius: "20px",
-                    fontSize: "0.65rem",
+                    padding: "0.2rem 0.55rem",
+                    borderRadius: "9999px",
+                    fontSize: "0.68rem",
                     fontWeight: "700",
-                    background: "rgba(249, 115, 22, 0.15)",
-                    color: "#fb923c",
+                    background: "#fff7ed",
+                    color: "#c2410c",
+                    border: "1px solid #ffedd5",
                   }}
                 >
                   Final Year
@@ -82,14 +84,22 @@ export default function ProjectCard({ project, compact = false }: ProjectCardPro
               )}
               <span
                 style={{
-                  fontSize: "0.7rem",
+                  fontSize: "0.72rem",
                   fontWeight: "600",
+                  padding: "0.15rem 0.45rem",
+                  borderRadius: "6px",
+                  background:
+                    project.difficulty === "Advanced"
+                      ? "#fef2f2"
+                      : project.difficulty === "Intermediate"
+                      ? "#fefce8"
+                      : "#f0fdf4",
                   color:
                     project.difficulty === "Advanced"
-                      ? "#f87171"
+                      ? "#dc2626"
                       : project.difficulty === "Intermediate"
-                      ? "#fbbf24"
-                      : "#34d399",
+                      ? "#b45309"
+                      : "#16a34a",
                 }}
               >
                 {project.difficulty}
@@ -100,11 +110,11 @@ export default function ProjectCard({ project, compact = false }: ProjectCardPro
           {/* Title */}
           <h3
             style={{
-              fontSize: compact ? "0.95rem" : "1rem",
+              fontSize: compact ? "1rem" : "1.05rem",
               fontWeight: "700",
-              color: "#f8fafc",
+              color: "#0f172a",
               marginBottom: "0.5rem",
-              lineHeight: "1.3",
+              lineHeight: "1.35",
               display: "-webkit-box",
               WebkitLineClamp: compact ? 2 : 3,
               WebkitBoxOrient: "vertical",
@@ -118,8 +128,8 @@ export default function ProjectCard({ project, compact = false }: ProjectCardPro
           {!compact && (
             <p
               style={{
-                fontSize: "0.83rem",
-                color: "var(--muted)",
+                fontSize: "0.86rem",
+                color: "#64748b",
                 lineHeight: "1.6",
                 flex: 1,
                 marginBottom: "1rem",
@@ -134,14 +144,14 @@ export default function ProjectCard({ project, compact = false }: ProjectCardPro
           )}
 
           {/* Tech tags */}
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.3rem", marginBottom: "1rem" }}>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem", marginBottom: "1.1rem" }}>
             {project.technologies.slice(0, 4).map((tech) => (
-              <span key={tech} className="tech-badge" style={{ fontSize: "0.68rem" }}>
+              <span key={tech} className="tech-badge" style={{ fontSize: "0.72rem" }}>
                 {tech}
               </span>
             ))}
             {project.technologies.length > 4 && (
-              <span className="tech-badge" style={{ fontSize: "0.68rem", color: "var(--muted)" }}>
+              <span className="tech-badge" style={{ fontSize: "0.72rem", color: "#64748b" }}>
                 +{project.technologies.length - 4}
               </span>
             )}
@@ -153,30 +163,30 @@ export default function ProjectCard({ project, compact = false }: ProjectCardPro
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              paddingTop: "0.75rem",
-              borderTop: "1px solid var(--border)",
+              paddingTop: "0.85rem",
+              borderTop: "1px solid #f1f5f9",
               marginTop: "auto",
             }}
           >
             <div className="price-display">
-              <span className="price-currency">₹</span>
-              <span className="price-amount">{project.price.toLocaleString("en-IN")}</span>
+              <span className="price-currency" style={{ color: "#0f172a" }}>₹</span>
+              <span className="price-amount" style={{ color: "#0f172a" }}>{project.price.toLocaleString("en-IN")}</span>
               {project.originalPrice && (
-                <span className="price-original">₹{project.originalPrice.toLocaleString("en-IN")}</span>
+                <span className="price-original" style={{ color: "#94a3b8" }}>₹{project.originalPrice.toLocaleString("en-IN")}</span>
               )}
             </div>
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: "0.3rem",
-                fontSize: "0.8rem",
+                gap: "0.35rem",
+                fontSize: "0.85rem",
                 fontWeight: "600",
-                color: "#9f67ff",
+                color: "#2563eb",
                 transition: "gap 0.2s",
               }}
             >
-              View Project <ArrowRight size={14} />
+              View Details <ArrowRight size={14} />
             </div>
           </div>
         </div>

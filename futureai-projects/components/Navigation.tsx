@@ -17,6 +17,8 @@ import {
   MessageSquare,
   User,
   LogIn,
+  Layers,
+  ArrowUpRight
 } from "lucide-react";
 
 const NAV_LINKS = [
@@ -60,39 +62,74 @@ export default function Navigation() {
       <nav
         className="navbar"
         style={{
-          background: scrolled ? "rgba(15, 15, 26, 0.98)" : "rgba(15, 15, 26, 0.85)",
-          boxShadow: scrolled ? "0 2px 20px rgba(0,0,0,0.4)" : "none",
-          transition: "all 0.3s ease",
+          background: scrolled ? "rgba(255, 255, 255, 0.96)" : "rgba(255, 255, 255, 0.90)",
+          boxShadow: scrolled ? "0 4px 20px -2px rgba(15, 23, 42, 0.06)" : "none",
+          borderBottom: "1px solid #e2e8f0",
+          transition: "all 0.25s ease",
         }}
       >
-        <div className="container" style={{ display: "flex", alignItems: "center", gap: "2rem", width: "100%" }}>
+        <div className="container" style={{ display: "flex", alignItems: "center", gap: "1.75rem", width: "100%" }}>
           {/* Logo */}
-          <Link href="/" style={{ display: "flex", alignItems: "center", gap: "0.5rem", flexShrink: 0 }}>
+          <Link href="/" style={{ display: "flex", alignItems: "center", gap: "0.6rem", flexShrink: 0 }}>
             <div
               style={{
-                width: "32px",
-                height: "32px",
-                borderRadius: "8px",
-                background: "linear-gradient(135deg, #7C3AED, #06B6D4)",
+                width: "34px",
+                height: "34px",
+                borderRadius: "10px",
+                background: "linear-gradient(135deg, #2563eb, #4f46e5)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                fontSize: "14px",
+                fontSize: "15px",
                 fontWeight: "800",
                 color: "#fff",
+                boxShadow: "0 2px 8px rgba(37, 99, 235, 0.25)",
               }}
             >
               F
             </div>
             <div>
-              <div style={{ fontSize: "1rem", fontWeight: "800", color: "#f8fafc", lineHeight: "1.1" }}>
+              <div style={{ fontSize: "1.05rem", fontWeight: "800", color: "#0f172a", lineHeight: "1.1" }}>
                 FutureAI
               </div>
-              <div style={{ fontSize: "0.6rem", color: "#7C3AED", fontWeight: "600", letterSpacing: "0.05em", lineHeight: "1" }}>
+              <div style={{ fontSize: "0.62rem", color: "#2563eb", fontWeight: "700", letterSpacing: "0.06em", lineHeight: "1" }}>
                 PROJECTS
               </div>
             </div>
           </Link>
+
+          {/* Quick Ecosystem Switch Pill (Back to Main) */}
+          <a
+            href="https://futureee.me"
+            className="back-link"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.35rem",
+              fontSize: "0.78rem",
+              fontWeight: "600",
+              color: "#475569",
+              background: "#f1f5f9",
+              border: "1px solid #e2e8f0",
+              padding: "0.35rem 0.75rem",
+              borderRadius: "9999px",
+              transition: "all 0.2s ease",
+              textDecoration: "none",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "#eff6ff";
+              e.currentTarget.style.color = "#2563eb";
+              e.currentTarget.style.borderColor = "#bfdbfe";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "#f1f5f9";
+              e.currentTarget.style.color = "#475569";
+              e.currentTarget.style.borderColor = "#e2e8f0";
+            }}
+          >
+            <ArrowLeft size={13} />
+            <span>Internships Home</span>
+          </a>
 
           {/* Desktop Nav Links */}
           <div
@@ -115,8 +152,8 @@ export default function Navigation() {
                   <button
                     className="btn-ghost"
                     style={{
-                      color: isActive(link.href || "") ? "#9f67ff" : "#cbd5e1",
-                      fontWeight: "500",
+                      color: isActive(link.href || "") ? "#2563eb" : "#475569",
+                      fontWeight: isActive(link.href || "") ? "600" : "500",
                       fontSize: "0.875rem",
                     }}
                   >
@@ -129,12 +166,12 @@ export default function Navigation() {
                         position: "absolute",
                         top: "calc(100% + 4px)",
                         left: 0,
-                        background: "var(--surface)",
-                        border: "1px solid var(--border)",
+                        background: "#ffffff",
+                        border: "1px solid #e2e8f0",
                         borderRadius: "12px",
                         padding: "0.5rem",
                         minWidth: "220px",
-                        boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
+                        boxShadow: "0 10px 30px -4px rgba(15, 23, 42, 0.1)",
                         zIndex: 50,
                       }}
                     >
@@ -149,19 +186,19 @@ export default function Navigation() {
                             padding: "0.6rem 0.75rem",
                             borderRadius: "8px",
                             fontSize: "0.875rem",
-                            color: "#cbd5e1",
-                            transition: "background 0.15s",
+                            color: "#334155",
+                            transition: "background 0.15s, color 0.15s",
                           }}
                           onMouseEnter={(e) => {
-                            (e.currentTarget as HTMLElement).style.background = "var(--card)";
-                            (e.currentTarget as HTMLElement).style.color = "#f8fafc";
+                            (e.currentTarget as HTMLElement).style.background = "#f1f5f9";
+                            (e.currentTarget as HTMLElement).style.color = "#2563eb";
                           }}
                           onMouseLeave={(e) => {
                             (e.currentTarget as HTMLElement).style.background = "transparent";
-                            (e.currentTarget as HTMLElement).style.color = "#cbd5e1";
+                            (e.currentTarget as HTMLElement).style.color = "#334155";
                           }}
                         >
-                          <child.icon size={15} color="#7C3AED" />
+                          <child.icon size={15} color="#2563eb" />
                           {child.label}
                         </Link>
                       ))}
@@ -174,8 +211,8 @@ export default function Navigation() {
                   href={link.href!}
                   className="btn-ghost"
                   style={{
-                    color: isActive(link.href!) ? "#9f67ff" : "#cbd5e1",
-                    fontWeight: "500",
+                    color: isActive(link.href!) ? "#2563eb" : "#475569",
+                    fontWeight: isActive(link.href!) ? "600" : "500",
                     fontSize: "0.875rem",
                   }}
                 >
@@ -186,35 +223,13 @@ export default function Navigation() {
           </div>
 
           {/* Right side actions */}
-          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", flexShrink: 0 }}>
-            {/* Back to FutureAI */}
-            <a
-              href="https://futureee.me"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="back-link"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "0.3rem",
-                fontSize: "0.75rem",
-                color: "var(--muted)",
-                padding: "0.25rem 0.5rem",
-                borderRadius: "6px",
-                border: "1px solid var(--border)",
-                transition: "color 0.2s, border-color 0.2s",
-              }}
-            >
-              <ArrowLeft size={12} />
-              FutureAI
-            </a>
-
+          <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", flexShrink: 0 }}>
             {/* Search */}
             <button
               className="btn-ghost"
               onClick={() => setSearchOpen(true)}
               aria-label="Search projects"
-              style={{ padding: "0.5rem" }}
+              style={{ padding: "0.5rem", color: "#64748b" }}
             >
               <Search size={18} />
             </button>
@@ -223,15 +238,15 @@ export default function Navigation() {
             <Link
               href="/auth/login"
               className="btn-ghost"
-              style={{ padding: "0.5rem 0.75rem", fontSize: "0.875rem" }}
+              style={{ padding: "0.45rem 0.75rem", fontSize: "0.875rem", color: "#334155" }}
             >
               <LogIn size={16} />
               <span className="hide-mobile">Login</span>
             </Link>
 
             {/* Explore CTA */}
-            <Link href="/projects" className="btn-primary explore-cta" style={{ padding: "0.5rem 1rem", fontSize: "0.85rem" }}>
-              Explore Projects
+            <Link href="/projects" className="btn-primary explore-cta" style={{ padding: "0.45rem 0.95rem", fontSize: "0.85rem" }}>
+              Explore Kits
             </Link>
 
             {/* Mobile menu button */}
@@ -239,9 +254,9 @@ export default function Navigation() {
               className="btn-ghost mobile-menu-btn"
               onClick={() => setIsOpen(true)}
               aria-label="Open menu"
-              style={{ padding: "0.5rem" }}
+              style={{ padding: "0.5rem", color: "#0f172a" }}
             >
-              <Menu size={20} />
+              <Menu size={22} />
             </button>
           </div>
         </div>
@@ -253,32 +268,52 @@ export default function Navigation() {
           <div
             className="mobile-nav-overlay"
             onClick={() => setIsOpen(false)}
-            style={{ animation: "fadeIn 0.2s ease" }}
           />
           <div className="mobile-nav-drawer">
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.5rem" }}>
               <Link href="/" style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
                 <div
                   style={{
-                    width: "28px",
-                    height: "28px",
-                    borderRadius: "6px",
-                    background: "linear-gradient(135deg, #7C3AED, #06B6D4)",
+                    width: "30px",
+                    height: "30px",
+                    borderRadius: "8px",
+                    background: "linear-gradient(135deg, #2563eb, #4f46e5)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    fontSize: "12px",
+                    fontSize: "13px",
                     fontWeight: "800",
                     color: "#fff",
                   }}
                 >
                   F
                 </div>
-                <span style={{ fontWeight: "700", fontSize: "0.95rem" }}>FutureAI Projects</span>
+                <span style={{ fontWeight: "800", fontSize: "0.98rem", color: "#0f172a" }}>FutureAI Projects</span>
               </Link>
               <button className="btn-ghost" onClick={() => setIsOpen(false)} style={{ padding: "0.25rem" }}>
                 <X size={20} />
               </button>
+            </div>
+
+            {/* Back link in drawer */}
+            <div style={{ marginBottom: "1rem" }}>
+              <a
+                href="https://futureee.me"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                  fontSize: "0.85rem",
+                  fontWeight: "600",
+                  color: "#2563eb",
+                  background: "#eff6ff",
+                  padding: "0.6rem 0.75rem",
+                  borderRadius: "8px",
+                  border: "1px solid #bfdbfe",
+                }}
+              >
+                <ArrowLeft size={14} /> Back to FutureAI Internships
+              </a>
             </div>
 
             {/* Mobile links */}
@@ -295,7 +330,7 @@ export default function Navigation() {
               <Link href="/contact" style={mobileLinkStyle(isActive("/contact"))}>Contact</Link>
             </div>
 
-            <div style={{ height: "1px", background: "var(--border)", margin: "1rem 0" }} />
+            <div style={{ height: "1px", background: "#e2e8f0", margin: "1rem 0" }} />
 
             <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
               <Link href="/auth/login" className="btn-secondary" style={{ justifyContent: "center" }}>
@@ -304,23 +339,6 @@ export default function Navigation() {
               <Link href="/projects" className="btn-primary" style={{ justifyContent: "center" }}>
                 Explore Projects
               </Link>
-            </div>
-
-            <div style={{ marginTop: "1rem", paddingTop: "1rem", borderTop: "1px solid var(--border)" }}>
-              <a
-                href="https://futureee.me"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.4rem",
-                  fontSize: "0.8rem",
-                  color: "var(--muted)",
-                }}
-              >
-                <ArrowLeft size={12} /> Back to FutureAI main site
-              </a>
             </div>
           </div>
         </>
@@ -332,7 +350,7 @@ export default function Navigation() {
           style={{
             position: "fixed",
             inset: 0,
-            background: "rgba(0,0,0,0.7)",
+            background: "rgba(15, 23, 42, 0.4)",
             backdropFilter: "blur(8px)",
             zIndex: 200,
             display: "flex",
@@ -346,14 +364,15 @@ export default function Navigation() {
             style={{
               width: "100%",
               maxWidth: "600px",
-              background: "var(--surface)",
-              border: "1px solid var(--border)",
+              background: "#ffffff",
+              border: "1px solid #e2e8f0",
               borderRadius: "16px",
               padding: "1.5rem",
+              boxShadow: "0 20px 40px -10px rgba(15, 23, 42, 0.15)",
             }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1rem" }}>
-              <Search size={20} color="var(--muted)" />
+              <Search size={20} color="#64748b" />
               <input
                 autoFocus
                 className="input-field"
@@ -371,7 +390,7 @@ export default function Navigation() {
                 <X size={16} />
               </button>
             </div>
-            <div style={{ fontSize: "0.8rem", color: "var(--muted)" }}>
+            <div style={{ fontSize: "0.82rem", color: "#64748b" }}>
               Try: &quot;AI&quot;, &quot;Python&quot;, &quot;RAG&quot;, &quot;final year&quot;, &quot;computer vision&quot;
             </div>
           </div>
@@ -405,8 +424,8 @@ function mobileLinkStyle(active: boolean): React.CSSProperties {
     borderRadius: "8px",
     fontSize: "0.9rem",
     fontWeight: "500",
-    color: active ? "#9f67ff" : "#cbd5e1",
-    background: active ? "rgba(124, 58, 237, 0.1)" : "transparent",
+    color: active ? "#2563eb" : "#475569",
+    background: active ? "#eff6ff" : "transparent",
     transition: "all 0.15s",
   };
 }

@@ -15,7 +15,8 @@ import {
   Info, 
   Flame, 
   LogIn,
-  Layers
+  Layers,
+  ArrowUpRight
 } from "lucide-react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/lib/firebase/config";
@@ -69,13 +70,11 @@ export default function Navigation() {
           {/* Desktop Menu */}
           <div className="nav-desktop-menu">
             <Link 
-              href="/courses" 
-              className={`nav-link ${pathname === "/courses" ? "nav-link--active" : ""}`}
+              href="/#tracks" 
+              className="nav-link"
               style={{ display: "inline-flex", alignItems: "center", gap: "0.35rem" }}
             >
-              <Flame size={14} color="#f59e0b" />
-              Courses
-              <span className="nav-badge-hot">HOT</span>
+              Internships
             </Link>
             <Link 
               href="/1_month_internship" 
@@ -83,15 +82,22 @@ export default function Navigation() {
             >
               1-Month Track
             </Link>
+            <Link 
+              href="/courses" 
+              className={`nav-link ${pathname === "/courses" ? "nav-link--active" : ""}`}
+              style={{ display: "inline-flex", alignItems: "center", gap: "0.35rem" }}
+            >
+              Courses
+              <span className="nav-badge-hot">HOT</span>
+            </Link>
             <a 
               href="https://projects.futureee.me" 
               target="_blank" 
               rel="noopener noreferrer"
               className="nav-link"
-              style={{ display: "inline-flex", alignItems: "center", gap: "0.35rem" }}
+              style={{ display: "inline-flex", alignItems: "center", gap: "0.3rem" }}
             >
-              <BookOpen size={14} color="#7C3AED" />
-              Projects
+              Projects <ArrowUpRight size={12} color="#64748b" />
             </a>
             <Link href="/#curriculum" className="nav-link">
               Curriculum

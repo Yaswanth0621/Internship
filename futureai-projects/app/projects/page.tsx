@@ -103,12 +103,13 @@ export default function ProjectsPage() {
                 padding: "0.5rem 0.75rem",
                 borderRadius: "8px",
                 fontSize: "0.85rem",
-                color: selectedCategory === cat.id ? "#f8fafc" : "var(--muted-light)",
-                background: selectedCategory === cat.id ? "rgba(124,58,237,0.15)" : "transparent",
-                border: selectedCategory === cat.id ? "1px solid rgba(124,58,237,0.4)" : "1px solid transparent",
+                color: selectedCategory === cat.id ? "#2563eb" : "#475569",
+                background: selectedCategory === cat.id ? "#eff6ff" : "transparent",
+                border: selectedCategory === cat.id ? "1px solid #bfdbfe" : "1px solid transparent",
                 cursor: "pointer",
                 textAlign: "left",
                 transition: "all 0.15s",
+                fontWeight: selectedCategory === cat.id ? "600" : "400",
               }}
             >
               <span>{cat.icon}</span>
@@ -120,7 +121,7 @@ export default function ProjectsPage() {
 
       {/* Difficulty */}
       <div>
-        <h4 style={{ fontSize: "0.8rem", fontWeight: "700", color: "var(--muted)", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "0.75rem" }}>
+        <h4 style={{ fontSize: "0.8rem", fontWeight: "700", color: "#64748b", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "0.75rem" }}>
           Difficulty
         </h4>
         <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem" }}>
@@ -135,11 +136,12 @@ export default function ProjectsPage() {
                 padding: "0.5rem 0.75rem",
                 borderRadius: "8px",
                 fontSize: "0.85rem",
-                color: selectedDifficulty === d ? "#f8fafc" : "var(--muted-light)",
-                background: selectedDifficulty === d ? "rgba(124,58,237,0.15)" : "transparent",
-                border: selectedDifficulty === d ? "1px solid rgba(124,58,237,0.4)" : "1px solid transparent",
+                color: selectedDifficulty === d ? "#2563eb" : "#475569",
+                background: selectedDifficulty === d ? "#eff6ff" : "transparent",
+                border: selectedDifficulty === d ? "1px solid #bfdbfe" : "1px solid transparent",
                 cursor: "pointer",
                 textAlign: "left",
+                fontWeight: selectedDifficulty === d ? "600" : "400",
               }}
             >
               <span
@@ -147,7 +149,7 @@ export default function ProjectsPage() {
                   width: "8px",
                   height: "8px",
                   borderRadius: "50%",
-                  background: d === "Advanced" ? "#f87171" : d === "Intermediate" ? "#fbbf24" : "#34d399",
+                  background: d === "Advanced" ? "#dc2626" : d === "Intermediate" ? "#d97706" : "#16a34a",
                   flexShrink: 0,
                 }}
               />
@@ -159,7 +161,7 @@ export default function ProjectsPage() {
 
       {/* Price */}
       <div>
-        <h4 style={{ fontSize: "0.8rem", fontWeight: "700", color: "var(--muted)", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "0.75rem" }}>
+        <h4 style={{ fontSize: "0.8rem", fontWeight: "700", color: "#64748b", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "0.75rem" }}>
           Price Range
         </h4>
         <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem" }}>
@@ -171,11 +173,12 @@ export default function ProjectsPage() {
                 padding: "0.5rem 0.75rem",
                 borderRadius: "8px",
                 fontSize: "0.85rem",
-                color: selectedPriceRange === i ? "#f8fafc" : "var(--muted-light)",
-                background: selectedPriceRange === i ? "rgba(124,58,237,0.15)" : "transparent",
-                border: selectedPriceRange === i ? "1px solid rgba(124,58,237,0.4)" : "1px solid transparent",
+                color: selectedPriceRange === i ? "#2563eb" : "#475569",
+                background: selectedPriceRange === i ? "#eff6ff" : "transparent",
+                border: selectedPriceRange === i ? "1px solid #bfdbfe" : "1px solid transparent",
                 cursor: "pointer",
                 textAlign: "left",
+                fontWeight: selectedPriceRange === i ? "600" : "400",
               }}
             >
               {range.label}
@@ -195,10 +198,10 @@ export default function ProjectsPage() {
             width: "100%",
             padding: "0.5rem 0.75rem",
             borderRadius: "8px",
-            background: showFinalYear ? "rgba(249,115,22,0.1)" : "transparent",
-            border: showFinalYear ? "1px solid rgba(249,115,22,0.3)" : "1px solid transparent",
+            background: showFinalYear ? "#fff7ed" : "transparent",
+            border: showFinalYear ? "1px solid #ffedd5" : "1px solid transparent",
             cursor: "pointer",
-            color: showFinalYear ? "#fb923c" : "var(--muted-light)",
+            color: showFinalYear ? "#c2410c" : "#475569",
             fontSize: "0.85rem",
             fontWeight: "600",
           }}
@@ -349,7 +352,7 @@ export default function ProjectsPage() {
               }}
             >
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
-                <h3 style={{ fontSize: "0.9rem", fontWeight: "700", color: "#f8fafc" }}>Filters</h3>
+                <h3 style={{ fontSize: "0.9rem", fontWeight: "700", color: "#0f172a" }}>Filters</h3>
                 {hasFilters && (
                   <button onClick={clearFilters} className="btn-ghost" style={{ fontSize: "0.75rem", padding: "0.25rem 0.5rem" }}>
                     Clear all
@@ -369,7 +372,7 @@ export default function ProjectsPage() {
                   marginBottom: "1rem",
                 }}
               >
-                <span style={{ fontSize: "0.85rem", color: "var(--muted)" }}>
+                <span style={{ fontSize: "0.85rem", color: "#64748b" }}>
                   {filtered.length} project{filtered.length !== 1 ? "s" : ""} found
                 </span>
               </div>
@@ -379,14 +382,14 @@ export default function ProjectsPage() {
                   style={{
                     textAlign: "center",
                     padding: "4rem 2rem",
-                    background: "var(--card)",
-                    border: "1px solid var(--border)",
+                    background: "#ffffff",
+                    border: "1px solid #e2e8f0",
                     borderRadius: "16px",
                   }}
                 >
                   <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>🔍</div>
-                  <h3 style={{ marginBottom: "0.5rem", color: "#f8fafc" }}>No projects found</h3>
-                  <p style={{ color: "var(--muted)", marginBottom: "1rem" }}>
+                  <h3 style={{ marginBottom: "0.5rem", color: "#0f172a" }}>No projects found</h3>
+                  <p style={{ color: "#64748b", marginBottom: "1rem" }}>
                     Try adjusting your filters or search query
                   </p>
                   <button onClick={clearFilters} className="btn-primary">
