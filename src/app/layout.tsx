@@ -176,7 +176,7 @@ export default function RootLayout({
                     "@type": "Offer",
                     "url": siteUrl,
                     "priceCurrency": "INR",
-                    "price": "100.00",
+                    "price": "119.00",
                     "availability": "https://schema.org/InStock",
                     "seller": {
                       "@type": "Organization",
@@ -188,8 +188,43 @@ export default function RootLayout({
                     "ratingValue": "4.9",
                     "bestRating": "5",
                     "worstRating": "1",
-                    "ratingCount": "10240"
+                    "ratingCount": "10247"
                   }
+                },
+                {
+                  "@type": "BreadcrumbList",
+                  "itemListElement": [
+                    {
+                      "@type": "ListItem",
+                      "position": 1,
+                      "name": "Home",
+                      "item": `${siteUrl}/`
+                    },
+                    {
+                      "@type": "ListItem",
+                      "position": 2,
+                      "name": "Internships",
+                      "item": `${siteUrl}/#tracks`
+                    },
+                    {
+                      "@type": "ListItem",
+                      "position": 3,
+                      "name": "1-Month Summer Cohort",
+                      "item": `${siteUrl}/1_month_internship`
+                    },
+                    {
+                      "@type": "ListItem",
+                      "position": 4,
+                      "name": "Trending Courses",
+                      "item": `${siteUrl}/courses`
+                    },
+                    {
+                      "@type": "ListItem",
+                      "position": 5,
+                      "name": "Verify Certificate",
+                      "item": `${siteUrl}/verify`
+                    }
+                  ]
                 },
                 {
                   "@type": "FAQPage",
@@ -199,23 +234,31 @@ export default function RootLayout({
                       "name": "Is FutureAI internship free?",
                       "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Yes, the learning curriculum and projects are 100% free. We only charge a small fee of ₹100 for the industry-verified certificate issuance and maintenance."
+                        "text": "Yes, the complete 7-module curriculum, coding challenges, and capstone project tasks are 100% free to access. A nominal fee of ₹119 is only charged when generating your official, tamper-proof verified certificate with cryptographic QR code."
                       }
                     },
                     {
                       "@type": "Question",
-                      "name": "Who can apply for this AI internship?",
+                      "name": "Can I submit the FutureAI Offer Letter and Certificate to my college for academic credits?",
                       "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Any student or professional interested in AI and Machine Learning can apply. It is especially designed for engineering and degree students in India."
+                        "text": "Yes. FutureAI internships follow AICTE model curriculum guidelines for engineering internships. Immediately upon registration, students can download an official Internship Offer & Acceptance letterhead for department approval."
                       }
                     },
                     {
                       "@type": "Question",
-                      "name": "How long is the internship program?",
+                      "name": "How do recruiters and colleges verify a FutureAI certificate?",
                       "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "We offer a 7-day intensive micro-internship as well as a comprehensive 1-Month Summer Internship track."
+                        "text": "Every certificate features a tamper-proof cryptographic QR code and unique credential ID (e.g., FAI-2026-XXXX). Scanning the QR code or visiting futureee.me/verify opens the student's live verifiable portfolio record."
+                      }
+                    },
+                    {
+                      "@type": "Question",
+                      "name": "What project kits are available on projects.futureee.me?",
+                      "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Our companion platform projects.futureee.me features over 30+ ready-to-run engineering project kits in Generative AI, RAG Systems, Machine Learning, Computer Vision, and Full Stack with complete source code, IEEE reports, and viva PPTs."
                       }
                     }
                   ]
@@ -239,9 +282,9 @@ export default function RootLayout({
                 {
                   "@type": "Course",
                   "@id": `${siteUrl}/#course`,
-                  name: "AI & Machine Learning Internship Programs",
+                  name: "AI & Machine Learning Virtual Internship Program",
                   description:
-                    "Intensive hands-on online internship tracks covering Python, Machine Learning, Deep Learning, NLP, Computer Vision, and MLOps. Earn a verified certificate upon completion.",
+                    "Practical online micro-internship covering Python, Machine Learning models, Deep Learning, Generative AI, and MLOps. Complete project tasks and earn an AICTE-aligned verified certificate.",
                   provider: { "@id": `${siteUrl}/#organization` },
                   url: siteUrl,
                   courseMode: "online",
@@ -249,11 +292,11 @@ export default function RootLayout({
                   inLanguage: "en-IN",
                   offers: {
                     "@type": "Offer",
-                    price: "100",
+                    price: "119",
                     priceCurrency: "INR",
                     availability: "https://schema.org/InStock",
                     validFrom: "2026-01-01",
-                    description: "Certificate fee. The internship itself is free.",
+                    description: "Certificate generation and verification fee. The internship curriculum is free.",
                   },
                   hasCourseInstance: {
                     "@type": "CourseInstance",
@@ -261,7 +304,7 @@ export default function RootLayout({
                     duration: "P30D",
                     instructor: {
                       "@type": "Person",
-                      name: "FutureAI Faculty",
+                      name: "FutureAI Directorate",
                     },
                   },
                 },
@@ -269,6 +312,9 @@ export default function RootLayout({
             }),
           }}
         />
+        <meta name="geo.region" content="IN" />
+        <meta name="geo.placename" content="India" />
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/logo.png" />
       </head>
